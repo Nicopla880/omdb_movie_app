@@ -89,6 +89,7 @@ void main() {
           'A thief steals corporate secrets through dream-sharing technology.',
       runtime: '148 min',
       genre: 'Action, Adventure, Sci-Fi',
+      poster: 'N/A',
     );
 
     test('should perform a GET request and return a MovieDetailsModel',
@@ -118,6 +119,7 @@ void main() {
             'A thief steals corporate secrets through dream-sharing technology.',
         runtime: '148 min',
         genre: 'Action, Adventure, Sci-Fi',
+        poster: 'N/A',
       );
 
       // Act

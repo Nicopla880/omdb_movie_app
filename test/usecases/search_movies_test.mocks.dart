@@ -80,4 +80,21 @@ class MockMovieRepository extends _i1.Mock implements _i3.MovieRepository {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i7.MovieDetails>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, void>> setFavoriteMovie(String? movieId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setFavoriteMovie,
+          [movieId],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
+            _FakeEither_0<_i5.Failure, void>(
+          this,
+          Invocation.method(
+            #setFavoriteMovie,
+            [movieId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, void>>);
 }

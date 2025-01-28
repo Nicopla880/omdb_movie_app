@@ -14,9 +14,14 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   // Use case for fetching detailed information about a specific movie.
   final GetMovieDetails getMovieDetails;
 
+  final SetFavoriteMovie setFavoriteMovie;
+
   /// Constructor for initializing the `MovieBloc` with required dependencies.
   /// The `super` call sets the initial state to `MovieInitial`.
-  MovieBloc({required this.searchMovies, required this.getMovieDetails})
+  MovieBloc(
+      {required this.searchMovies,
+      required this.getMovieDetails,
+      required this.setFavoriteMovie})
       : super(MovieInitial()) {
     // Event handler for `SearchMoviesEvent`.
     // Triggered when the user initiates a search for movies.
@@ -51,6 +56,21 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
       result.fold(
         (failure) => emit(MovieError('Failed to load movie details.')),
         (details) => emit(MovieDetailsLoaded(details)),
+      );
+    });
+
+    on<SaveFavoriteEvent>((event, emit) async {
+      final result = await setFavoriteMovie(event.movieId);
+      result.fold(
+        (failure) => emit(MovieError('Failed to load movie details.')),
+        (result) {
+          if (state is MovieDetailsLoaded) {
+            final movieDetailsLoaded = state as MovieDetailsLoaded;
+            final details = movieDetailsLoaded.movieDetails
+                .copyWith(isFavoriteMovie: result);
+            emit(MovieDetailsLoaded(details));
+          }
+        },
       );
     });
   }

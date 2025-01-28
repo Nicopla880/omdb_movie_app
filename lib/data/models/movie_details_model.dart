@@ -11,15 +11,16 @@ class MovieDetailsModel extends MovieDetails {
     required String plot,
     required String runtime,
     required String genre,
+    required String poster,
   }) : super(
-          title: title,
-          year: year,
-          director: director,
-          actors: actors,
-          plot: plot,
-          runtime: runtime,
-          genre: genre,
-        );
+            title: title,
+            year: year,
+            director: director,
+            actors: actors,
+            plot: plot,
+            runtime: runtime,
+            genre: genre,
+            poster: poster);
 
   /// Factory method to create a MovieDetailsModel from a JSON map.
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +32,7 @@ class MovieDetailsModel extends MovieDetails {
       plot: json['Plot'],
       runtime: json['Runtime'],
       genre: json['Genre'],
+      poster: json['Poster'],
     );
   }
 }

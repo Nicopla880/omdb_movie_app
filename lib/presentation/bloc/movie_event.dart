@@ -39,3 +39,12 @@ class GetMovieDetailsEvent extends MovieEvent {
   @override
   List<Object?> get props => [movieId];
 }
+
+class SaveFavoriteEvent extends MovieEvent {
+  final String movieId;
+
+  SaveFavoriteEvent(this.movieId);
+
+  @override
+  List<Object?> get props => [movieId];
+}

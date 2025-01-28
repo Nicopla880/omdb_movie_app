@@ -12,4 +12,6 @@ abstract class MovieRepository {
 
   /// Fetches detailed information about a movie by its ID.
   Future<Either<Failure, MovieDetails>> getMovieDetails(String movieId);
+
+  Future<Either<Failure, bool>> setFavoriteMovie(String movieId);
 }

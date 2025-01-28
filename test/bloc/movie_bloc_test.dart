@@ -15,18 +15,22 @@ import 'package:omdb_movie_app/presentation/bloc/movie_state.dart';
 import 'movie_bloc_test.mocks.dart';
 
 // Generate Mock Classes
-@GenerateMocks([SearchMovies, GetMovieDetails])
+@GenerateMocks([SearchMovies, GetMovieDetails, SetFavoriteMovie])
 void main() {
   late MockSearchMovies mockSearchMovies;
   late MockGetMovieDetails mockGetMovieDetails;
+  late MockSetFavoriteMovie setFavoriteMovie;
   late MovieBloc movieBloc;
 
   setUp(() {
     mockSearchMovies = MockSearchMovies();
     mockGetMovieDetails = MockGetMovieDetails();
+    setFavoriteMovie = MockSetFavoriteMovie();
+
     movieBloc = MovieBloc(
       searchMovies: mockSearchMovies,
       getMovieDetails: mockGetMovieDetails,
+      setFavoriteMovie: setFavoriteMovie,
     );
   });
 
@@ -70,15 +74,15 @@ void main() {
 
   group('GetMovieDetailsEvent', () {
     final tMovieDetails = MovieDetails(
-      title: 'Inception',
-      year: '2010',
-      director: 'Christopher Nolan',
-      actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page',
-      plot:
-          'A thief steals corporate secrets through dream-sharing technology.',
-      runtime: '148 min',
-      genre: 'Action, Adventure, Sci-Fi',
-    );
+        title: 'Inception',
+        year: '2010',
+        director: 'Christopher Nolan',
+        actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page',
+        plot:
+            'A thief steals corporate secrets through dream-sharing technology.',
+        runtime: '148 min',
+        genre: 'Action, Adventure, Sci-Fi',
+        poster: 'N/A');
 
     blocTest<MovieBloc, MovieState>(
       'emits [MovieLoading, MovieDetailsLoaded] when details are fetched successfully',
@@ -90,7 +94,7 @@ void main() {
       act: (bloc) => bloc.add(GetMovieDetailsEvent('tt1375666')),
       expect: () => [
         MovieLoading(),
-        MovieDetailsLoaded(tMovieDetails),
+        MovieDetailsLoaded(tMovieDetails, true),
       ],
     );
 

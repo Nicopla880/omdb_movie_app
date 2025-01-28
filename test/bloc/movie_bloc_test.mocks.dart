@@ -119,3 +119,38 @@ class MockGetMovieDetails extends _i1.Mock implements _i8.GetMovieDetails {
         )),
       ) as _i5.Future<_i3.Either<_i6.Failure, _i9.MovieDetails>>);
 }
+
+/// A class which mocks [SetFavoriteMovie].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSetFavoriteMovie extends _i1.Mock implements _i8.SetFavoriteMovie {
+  MockSetFavoriteMovie() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository => (super.noSuchMethod(
+        Invocation.getter(#repository),
+        returnValue: _FakeMovieRepository_0(
+          this,
+          Invocation.getter(#repository),
+        ),
+      ) as _i2.MovieRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, void>> call(String? movieId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [movieId],
+        ),
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, void>>.value(
+            _FakeEither_1<_i6.Failure, void>(
+          this,
+          Invocation.method(
+            #call,
+            [movieId],
+          ),
+        )),
+      ) as _i5.Future<_i3.Either<_i6.Failure, void>>);
+}

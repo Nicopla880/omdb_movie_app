@@ -64,8 +64,8 @@ class SearchPage extends StatelessWidget {
                         ),
                         title: Text(movie.title),
                         subtitle: Text(movie.year),
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async {
+                          await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => BlocProvider.value(
@@ -74,6 +74,7 @@ class SearchPage extends StatelessWidget {
                               ),
                             ),
                           );
+                          _searchController.text = "";
                         },
                       );
                     },

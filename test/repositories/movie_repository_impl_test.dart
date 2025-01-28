@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:omdb_movie_app/core/error/exceptions.dart';
 import 'package:omdb_movie_app/core/error/failures.dart';
+import 'package:omdb_movie_app/data/datasources/movie_local_data_source.dart';
 import 'package:omdb_movie_app/data/datasources/movie_remote_data_source.dart';
 import 'package:omdb_movie_app/data/models/movie_model.dart';
 import 'package:omdb_movie_app/data/repositories/movie_repository_impl.dart';
@@ -11,14 +13,22 @@ import 'package:omdb_movie_app/domain/entities/movie.dart';
 
 import 'movie_repository_impl_test.mocks.dart';
 
-@GenerateMocks([MovieRemoteDataSource])
+@GenerateMocks([MovieRemoteDataSource, MovieLocalDataSource])
 void main() {
   late MockMovieRemoteDataSource mockRemoteDataSource;
+  late MovieLocalDataSource movieLocalDataSource;
   late MovieRepositoryImpl repository;
 
   setUp(() {
+    final movieBox = Hive.box("movieBox");
+
     mockRemoteDataSource = MockMovieRemoteDataSource();
-    repository = MovieRepositoryImpl(remoteDataSource: mockRemoteDataSource);
+    movieLocalDataSource = MovieLocalDataSourceImpl(box: movieBox);
+
+    repository = MovieRepositoryImpl(
+      remoteDataSource: mockRemoteDataSource,
+      localDataSource: movieLocalDataSource,
+    );
   });
 
   group('searchMovies', () {

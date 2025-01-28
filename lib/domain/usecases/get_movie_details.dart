@@ -17,3 +17,15 @@ class GetMovieDetails implements UseCase<MovieDetails, String> {
     return await repository.getMovieDetails(movieId);
   }
 }
+
+class SetFavoriteMovie implements UseCase<void, String> {
+  final MovieRepository repository;
+
+  SetFavoriteMovie(this.repository);
+
+  /// Executes the use case by delegating to the repository.
+  @override
+  Future<Either<Failure, bool>> call(String movieId) async {
+    return await repository.setFavoriteMovie(movieId);
+  }
+}

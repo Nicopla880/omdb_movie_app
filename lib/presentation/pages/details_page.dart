@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:omdb_movie_app/domain/usecases/get_movie_details.dart';
 
 import '../bloc/movie_bloc.dart';
 import '../bloc/movie_event.dart';
@@ -19,6 +21,27 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Movie Details'),
+        actions: [
+          BlocBuilder<MovieBloc, MovieState>(builder: (context, state) {
+            if (state is MovieDetailsLoaded) {
+              final isFavorite = state.movieDetails.isFavoriteMovie;
+              return IconButton(
+                onPressed: () {
+                  context.read<MovieBloc>().add(
+                        SaveFavoriteEvent(
+                          movieId,
+                        ),
+                      );
+                },
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                  color: isFavorite ? Colors.red : Colors.black,
+                ),
+              );
+            }
+            return SizedBox.shrink();
+          }),
+        ],
       ),
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
@@ -34,6 +57,18 @@ class DetailsPage extends StatelessWidget {
                   Text(
                     details.title,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  CachedNetworkImage(
+                    imageUrl: details.poster,
+                    fit: BoxFit.fitHeight,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                      value: downloadProgress.progress,
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                   SizedBox(height: 10),
                   Text('Year: ${details.year}', style: TextStyle(fontSize: 16)),

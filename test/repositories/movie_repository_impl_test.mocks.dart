@@ -84,12 +84,20 @@ class MockMovieLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<void> setFavoriteMovie(String? id) => (super.noSuchMethod(
+  _i4.Future<bool> setFavoriteMovie(String? id) => (super.noSuchMethod(
         Invocation.method(
           #setFavoriteMovie,
           [id],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  _i4.Future<bool> isFavoriteMovie(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #isFavoriteMovie,
+          [id],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

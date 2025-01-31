@@ -19,6 +19,7 @@ import 'presentation/bloc/movie_bloc.dart';
 // Entry point of the Flutter application.
 void main() async {
   // Calls the root widget of the application.
+  WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   await Hive.openBox('userBox');

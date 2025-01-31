@@ -138,19 +138,19 @@ class MockSetFavoriteMovie extends _i1.Mock implements _i8.SetFavoriteMovie {
       ) as _i2.MovieRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, void>> call(String? movieId) =>
+  _i5.Future<_i3.Either<_i6.Failure, bool>> call(String? movieId) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [movieId],
         ),
-        returnValue: _i5.Future<_i3.Either<_i6.Failure, void>>.value(
-            _FakeEither_1<_i6.Failure, void>(
+        returnValue: _i5.Future<_i3.Either<_i6.Failure, bool>>.value(
+            _FakeEither_1<_i6.Failure, bool>(
           this,
           Invocation.method(
             #call,
             [movieId],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, void>>);
+      ) as _i5.Future<_i3.Either<_i6.Failure, bool>>);
 }
